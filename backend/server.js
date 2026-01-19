@@ -48,6 +48,18 @@ app.use((req, res, next) => {
 });
 app.use(express.static(distPath));
 
+// Явно отдаём index.html для корня
+app.get('/', (req, res) => {
+  console.log('Serving index.html for /');
+  res.sendFile(indexPath);
+});
+
+// Явно отдаём index.html для /index.html
+app.get('/index.html', (req, res) => {
+  console.log('Serving /index.html');
+  res.sendFile(indexPath);
+});
+
 // Все остальные запросы — отдаём index.html
 app.get('*', (req, res) => {
   res.sendFile(path.join(distPath, 'index.html'));
