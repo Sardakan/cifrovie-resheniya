@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "bun run server.js",
+    "dev": "bun run server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.1",
+    "cors": "^2.8.5"
+  }
+}
