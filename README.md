@@ -42,7 +42,7 @@
 
 1. Клонирование (если нужно)
     ```bash
-    git clone <репозиторий>
+    git clone <cifrovie-resheniya>
     cd cifrovie-resheniya
 
 
