@@ -22,7 +22,7 @@ app.use('/api', api);
 
 // Раздача фронтенда (из dist)
 const distPath = path.join(__dirname, '../frontend/dist');
-console.log('🔍 distPath:', distPath);
+console.log('distPath:', distPath);
 
 // Проверка: существует ли папка
 if (fs.existsSync(distPath)) {
@@ -50,8 +50,13 @@ app.use(express.static(distPath));
 
 // Явно отдаём index.html для корня
 app.get('/', (req, res) => {
-  console.log('Serving index.html for /');
-  res.sendFile(indexPath);
+  console.log('[ROUTE] GET / — Trying to serve index.html');
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.log('[ERROR] Failed to send index.html:', err.message);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 });
 
 // Явно отдаём index.html для /index.html
@@ -62,7 +67,13 @@ app.get('/index.html', (req, res) => {
 
 // Все остальные запросы — отдаём index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(distPath, 'index.html'));
+  console.log('[FALLBACK] GET * — Serving index.html for:', req.path);
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.log('[ERROR] Fallback failed:', err.message);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 });
 
 app.listen(PORT, '0.0.0.0', () => {
