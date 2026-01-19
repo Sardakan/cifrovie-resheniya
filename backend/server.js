@@ -5,6 +5,10 @@ import api from './routes/api.js';
 import cors from 'cors';
 import fs from 'fs';
 
+console.log('server.js started');
+console.log('process.cwd():', process.cwd());
+console.log('__dirname:', __dirname);
+
 
 // Настройка __dirname (для ESM)
 const __filename = fileURLToPath(import.meta.url);
