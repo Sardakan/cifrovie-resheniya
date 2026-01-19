@@ -14,6 +14,10 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Middleware
+app.use((req, res, next) => {
+  console.log('Incoming request:', req.method, req.url);
+  next();
+});
 app.use(cors());
 app.use(express.json());
 
@@ -77,7 +81,7 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Backend running on http://0.0.0.0:${PORT}`);
+  console.log(`Server is listening on http://0.0.0.0:${PORT} | process.env.PORT = ${process.env.PORT}`);
 });
 
 export default app;
