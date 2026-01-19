@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 
-const api = require('./routes/api.js');
+const api = require('./routes/api.js').default;
 const cors = require('cors');
 
 const app = express();
