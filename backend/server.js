@@ -80,8 +80,17 @@ app.get('*', (req, res) => {
   });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is listening on http://0.0.0.0:${PORT} | process.env.PORT = ${process.env.PORT}`);
+app.get('/ping', (req, res) => {
+  res.json({ status: 'ok', time: new Date().toISOString() });
+});
+
+app.listen(PORT, '0.0.0.0', (err) => {
+  if (err) {
+    console.error('ОШИБКА запуска сервера:', err);
+    process.exit(1);
+  }
+  console.log(`Сервер запущен: http://0.0.0.0:${PORT}`);
+  console.log(`Ожидаем запросы...`);
 });
 
 export default app;
