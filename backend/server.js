@@ -11,6 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+const HOST = '0.0.0.0';
 const PORT = process.env.PORT || 8080;
 
 // Middleware
@@ -84,13 +85,19 @@ app.get('/ping', (req, res) => {
   res.json({ status: 'ok', time: new Date().toISOString() });
 });
 
-app.listen(PORT, '0.0.0.0', (err) => {
+console.log('Зарегистрированы маршруты:');
+console.log('GET /');
+console.log('GET /index.html');
+console.log('GET /ping');
+console.log('GET /api/*');
+console.log('GET * → fallback');
+
+app.listen(PORT, HOST, (err) => {
   if (err) {
     console.error('ОШИБКА запуска сервера:', err);
     process.exit(1);
   }
-  console.log(`Сервер запущен: http://0.0.0.0:${PORT}`);
+  console.log(`Сервер запущен: http://${HOST}:${PORT}`);
   console.log(`Ожидаем запросы...`);
 });
-
 export default app;
